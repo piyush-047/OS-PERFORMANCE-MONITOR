@@ -26,5 +26,5 @@
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your_username/os-performance-monitor.git
-   cd os-performance-monitor
+   git clone https://github.com/piyush-047/OS-PERFORMANCE-MONITOR.git
+   cd OS-PERFORMANCE-MONITOR
