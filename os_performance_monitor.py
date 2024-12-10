@@ -7,9 +7,9 @@ from datetime import datetime
 
 # Email notification function
 def send_alert(subject, message):
-    sender = "your_email@gmail.com"
-    recipient = "admin_email@gmail.com"
-    password = "your_email_password"
+    sender = "piyush8981ssm@gmail.com"
+    recipient = "piyush8889l5@gmail.com"
+    password = "*******"
     
     msg = MIMEText(message)
     msg["Subject"] = subject
