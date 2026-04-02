@@ -7,21 +7,19 @@ import logging
 from email.mime.text import MIMEText
 from datetime import datetime
 
-# -------------------- Logging Setup --------------------
 logging.basicConfig(
     filename="monitor.log",
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# -------------------- Email Alert Function --------------------
 def send_alert(subject, message):
     sender = os.getenv("EMAIL_SENDER")
     recipient = os.getenv("EMAIL_RECIPIENT")
     password = os.getenv("EMAIL_PASSWORD")
 
     if not sender or not recipient or not password:
-        logging.error("Email credentials not set in environment variables")
+        logging.error("Email credentials not set")
         return
 
     msg = MIMEText(message)
@@ -34,11 +32,10 @@ def send_alert(subject, message):
             server.starttls()
             server.login(sender, password)
             server.sendmail(sender, recipient, msg.as_string())
-            logging.info("Alert email sent successfully")
+            logging.info("Alert sent")
     except Exception as e:
-        logging.error(f"Failed to send alert: {e}")
+        logging.error(f"Error: {e}")
 
-# -------------------- Alert Cooldown --------------------
 last_alert_time = {}
 
 def should_alert(metric, cooldown=60):
@@ -48,65 +45,40 @@ def should_alert(metric, cooldown=60):
         return True
     return False
 
-# -------------------- PowerShell Execution --------------------
 def run_powershell_script(script_path):
     try:
         subprocess.run(
             ["powershell", "-ExecutionPolicy", "Bypass", "-File", script_path],
             check=True
         )
-        logging.info("PowerShell script executed successfully")
     except Exception as e:
-        logging.error(f"PowerShell execution failed: {e}")
+        logging.error(f"PowerShell error: {e}")
 
-# -------------------- Monitoring Function --------------------
-def monitor_performance(thresholds, interval=5):
-    print("Starting system performance monitoring...")
-    logging.info("Monitoring started")
+def monitor_performance(thresholds):
+    print("Monitoring started...")
 
     try:
         while True:
-            cpu_usage = psutil.cpu_percent(interval=1)
+            cpu = psutil.cpu_percent(interval=1)
             memory = psutil.virtual_memory()
             disk = psutil.disk_usage('C:\\')
-            network = psutil.net_io_counters()
 
-            print(f"\n[{datetime.now()}]")
-            print(f"CPU Usage: {cpu_usage}%")
-            print(f"Memory Usage: {memory.percent}%")
-            print(f"Disk Usage: {disk.percent}%")
-            print(f"Sent: {network.bytes_sent / 1024**2:.2f} MB")
-            print(f"Received: {network.bytes_recv / 1024**2:.2f} MB")
+            print(f"\nCPU: {cpu}% | Memory: {memory.percent}% | Disk: {disk.percent}%")
 
-            logging.info(f"CPU: {cpu_usage}% | Memory: {memory.percent}% | Disk: {disk.percent}%")
-
-            if cpu_usage > thresholds['cpu'] and should_alert("cpu"):
-                send_alert(
-                    "High CPU Usage Alert",
-                    f"CPU usage is {cpu_usage}% (Threshold: {thresholds['cpu']}%)"
-                )
+            if cpu > thresholds['cpu'] and should_alert("cpu"):
+                send_alert("CPU Alert", f"CPU usage is {cpu}%")
 
             if memory.percent > thresholds['memory'] and should_alert("memory"):
-                send_alert(
-                    "High Memory Usage Alert",
-                    f"Memory usage is {memory.percent}% (Threshold: {thresholds['memory']}%)"
-                )
+                send_alert("Memory Alert", f"Memory usage is {memory.percent}%")
 
             if disk.percent > thresholds['disk'] and should_alert("disk"):
-                send_alert(
-                    "Disk Usage Alert",
-                    f"Disk usage is {disk.percent}% (Threshold: {thresholds['disk']}%)"
-                )
+                send_alert("Disk Alert", f"Disk usage is {disk.percent}%")
 
-            run_powershell_script("performance_checks.ps1")
-
-            time.sleep(interval)
+            time.sleep(5)
 
     except KeyboardInterrupt:
-        print("\nMonitoring stopped by user.")
-        logging.info("Monitoring stopped manually")
+        print("\nStopped")
 
-# -------------------- Main --------------------
 if __name__ == "__main__":
     thresholds = {
         'cpu': 80,
