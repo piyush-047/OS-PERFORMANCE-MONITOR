@@ -1,37 +1,69 @@
 # OS Performance Monitor
 
 ## 🚀 Overview
+
 A real-time system monitoring tool built using Python and PowerShell to track CPU, memory, disk, and network usage, with automated alerts and performance insights.
 
+---
+
 ## 🔥 Key Features
-- Real-time monitoring of CPU, memory, disk, and network usage
-- Automated system health checks using PowerShell
-- Email alert system for performance threshold breaches
-- Log-based root cause analysis for troubleshooting
+
+* Real-time monitoring of CPU, memory, disk, and network usage
+* Automated system health checks using PowerShell
+* Email alert system for performance threshold breaches
+* Log-based root cause analysis for troubleshooting
+
+---
 
 ## 🛠️ Tech Stack
-- Python (psutil, pandas)
-- PowerShell
-- Windows System APIs
+
+* Python (psutil, pandas)
+* PowerShell
+* Windows System APIs
+
+---
 
 ## 📊 System Architecture
-- Python handles monitoring and data processing
-- PowerShell scripts handle deep system checks
-- Alert system triggers based on thresholds
 
-## 📸 Demo / Screenshots
-(Add screenshot here)
+* Python handles monitoring and data processing
+* PowerShell scripts handle deep system checks
+* Alert system triggers based on thresholds
+
+---
+
+## 📸 Demo Output
+
+![System Monitor Output](assets/demo_screenshot.png)
+
+---
+
+## 📊 System Metrics
+
+![Metrics](assets/system_metrics.png)
+
+---
 
 ## ⚙️ How to Run
+
+```bash
 git clone https://github.com/piyush-047/OS-PERFORMANCE-MONITOR
 cd OS-PERFORMANCE-MONITOR
 pip install -r requirements.txt
-python main.py
+python os_performance_monitor.py
+```
 
-## 🎯 Use Case
-Useful for system administrators and developers to monitor system health, detect performance issues, and reduce downtime.
+---
+
 ## ⚙️ How It Works
 
-- Python script collects system metrics (CPU, memory, disk)
-- PowerShell scripts perform deeper system checks
-- Alerts are triggered when thresholds are exceeded
+* Python script collects system metrics (CPU, memory, disk)
+* Compares values against predefined thresholds
+* PowerShell scripts perform deeper system checks
+* Alerts are triggered when thresholds are exceeded
+* Logs are stored for analysis
+
+---
+
+## 🎯 Use Case
+
+Useful for system administrators and developers to monitor system health, detect performance issues, and reduce downtime.
