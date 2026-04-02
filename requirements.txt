@@ -1,4 +1,2 @@
 psutil
 pandas
-smtplib
-
