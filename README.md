@@ -30,3 +30,8 @@ python main.py
 
 ## 🎯 Use Case
 Useful for system administrators and developers to monitor system health, detect performance issues, and reduce downtime.
+## ⚙️ How It Works
+
+- Python script collects system metrics (CPU, memory, disk)
+- PowerShell scripts perform deeper system checks
+- Alerts are triggered when thresholds are exceeded
