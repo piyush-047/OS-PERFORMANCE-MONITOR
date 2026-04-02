@@ -1,30 +1,32 @@
-# OS-PERFORMANCE-MONITOR
-"Windows-based monitoring tool to track system performance, automate checks, and send alerts for performance issues."
+# OS Performance Monitor
 
----
+## 🚀 Overview
+A real-time system monitoring tool built using Python and PowerShell to track CPU, memory, disk, and network usage, with automated alerts and performance insights.
 
-## Features
-- **Real-time Performance Monitoring:** Tracks CPU, memory, disk, and network usage.
-- **Automated System Checks:** Uses PowerShell for detailed performance checks and log retrieval.
-- **Notification Alerts:** Sends email alerts when performance thresholds are exceeded.
-- **Root Cause Analysis:** Provides logs and insights for troubleshooting.
+## 🔥 Key Features
+- Real-time monitoring of CPU, memory, disk, and network usage
+- Automated system health checks using PowerShell
+- Email alert system for performance threshold breaches
+- Log-based root cause analysis for troubleshooting
 
----
+## 🛠️ Tech Stack
+- Python (psutil, pandas)
+- PowerShell
+- Windows System APIs
 
-## Screenshots
-![Demo Screenshot](assets/demo_screenshot.png)
+## 📊 System Architecture
+- Python handles monitoring and data processing
+- PowerShell scripts handle deep system checks
+- Alert system triggers based on thresholds
 
----
+## 📸 Demo / Screenshots
+(Add screenshot here)
 
-## Prerequisites
-- **Python 3.8+**
-- **PowerShell 5.1+**
-- **Installed Python Libraries:** `psutil`, `pandas`
+## ⚙️ How to Run
+git clone https://github.com/piyush-047/OS-PERFORMANCE-MONITOR
+cd OS-PERFORMANCE-MONITOR
+pip install -r requirements.txt
+python main.py
 
----
-
-## Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/piyush-047/OS-PERFORMANCE-MONITOR.git
-   cd OS-PERFORMANCE-MONITOR
+## 🎯 Use Case
+Useful for system administrators and developers to monitor system health, detect performance issues, and reduce downtime.
